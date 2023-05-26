@@ -6,4 +6,13 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
 	plugins: [react(), reactRefresh()],
 	base: "/eliftech_delivery-service-frontend/",
+	build: {
+		rollupOptions: {
+			output: {
+				manualChunks: {
+					"404.html": ["./404.html"],
+				},
+			},
+		},
+	},
 });
