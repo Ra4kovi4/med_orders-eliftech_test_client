@@ -76,7 +76,9 @@ const Cart = () => {
 	return (
 		<main className={css.page_container}>
 			<h2 className={css.cartPage_title}>Your cart</h2>
-
+			<button className={css.submit_button} onClick={(e) => handleSubmit(e)}>
+				Place an order
+			</button>
 			<div className={css.content_wrapper}>
 				<OrderForm formData={formData} />
 				<OrderedDish
@@ -85,9 +87,7 @@ const Cart = () => {
 					setOrderedDish={setOrderData}
 				/>
 			</div>
-			<button className={css.submit_button} onClick={(e) => handleSubmit(e)}>
-				Place an order
-			</button>
+
 			<ToastContainer autoClose={2000} />
 		</main>
 	);
