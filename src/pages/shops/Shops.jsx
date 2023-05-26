@@ -18,10 +18,10 @@ export const ShopPage = React.memo(() => {
 			try {
 				const { data } = await fetchShops();
 				setShopData(data);
-				// if (data && data.result.length > 0) {
-				// 	const firstShopId = data.result[0]._id;
-				// 	await getShopsById(firstShopId);
-				// }
+				if (data && data.result.length > 0) {
+					const firstShopId = data.result[0]._id;
+					await getShopsById(firstShopId);
+				}
 			} catch (error) {
 				toast.error("Oops, something went wrong! Please try again later", {
 					position: "top-right",

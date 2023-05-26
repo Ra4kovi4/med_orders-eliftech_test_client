@@ -16,10 +16,9 @@
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	width: 100%;
 	padding: 15px;
-	height: fit-content;
-	max-height: 100%;
+	/* height: fit-content; */
+	/* max-height: 100%; */
 	overflow-y: auto;
-	flex-basis: 75%;
 }
 
 .order_item {

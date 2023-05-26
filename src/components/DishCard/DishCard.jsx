@@ -13,6 +13,8 @@ export const DishCard = ({ title, id, imageUrl, price }) => {
 
 		if (existingDishIndex.includes(id)) {
 			setIsAdded(true);
+		} else {
+			setIsAdded(false);
 		}
 	}, [id]);
 

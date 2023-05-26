@@ -1,18 +1,23 @@
+.form_wrapper {
+	height: 350px;
+	flex-basis: 100%;
+	padding: 15px;
+	background-color: rgb(247, 179, 96);
+	border: 1px #000 solid;
+	border-radius: 10px;
+	margin-bottom: 15px;
+}
+
 .form {
 	display: flex;
 	flex-direction: column;
-	height: 320px;
-	flex-basis: 25%;
-	padding: 15px;
-	border: 1px #000 solid;
-	border-radius: 20px;
-	background-color: rgb(247, 179, 96);
-	margin-right: 15px;
 }
+
 .label {
 	display: block;
 	margin-bottom: 10px;
 }
+
 .input_part {
 	display: block;
 	margin-bottom: 5px;
@@ -25,4 +30,22 @@
 	height: 40px;
 	padding: 4px;
 	border-radius: 10px;
+}
+
+@media screen and (min-width: 321px) {
+	.form_wrapper {
+		flex-basis: 50%;
+		margin-right: 15px;
+	}
+
+	.input_part {
+		margin-bottom: 10px;
+	}
+}
+
+@media screen and (min-width: 761px) {
+	.form_wrapper {
+		flex-basis: 25%;
+		margin-right: 15px;
+	}
 }
