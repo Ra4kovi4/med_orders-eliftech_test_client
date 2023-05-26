@@ -41,7 +41,7 @@ export const OrderedDish = ({
 		<>
 			<div className={css.wrapper}>
 				<p className={css.total}>Total Price: {getTotalPrice(orderedDish)}$</p>
-				<p>Your cart is empty</p>
+
 				{orderedDish.length > 0 ? (
 					<ul className={css.order_list}>
 						{orderedDish.map(({ id, imageUrl, title, price, quantity }) => (

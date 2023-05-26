@@ -11,7 +11,7 @@ const Cart = () => {
 	const formData = new FormData();
 
 	const [orderData, setOrderData] = useState([]);
-	console.log(orderData.length);
+
 	useEffect(() => {
 		const storedDishes = JSON.parse(localStorage.getItem("dishes")) || [];
 
