@@ -61,7 +61,7 @@ export const OrderedDish = ({
 					</ul>
 				) : (
 					<img
-						src='../../../src/images/cart.png'
+						src='https://i.postimg.cc/c4fSdRz9/25518797c3883faa8c2b68d427367eba.png'
 						alt='cart is empty'
 						width={600}
 					/>

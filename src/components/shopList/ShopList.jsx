@@ -16,7 +16,6 @@ export const ShopList = ({ shops, handleClick }) => {
 				{shops.map(({ _id, name, address }) => (
 					<li
 						key={_id}
-						// className={css.shopItem}
 						className={`${css.shopItem} ${
 							_id === selectedShopId ? css.selected : ""
 						}`}
