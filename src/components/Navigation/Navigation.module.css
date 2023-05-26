@@ -34,15 +34,15 @@
 	color: #0f9cd8;
 
 	padding: 15px;
-	&::after {
-		content: "";
-		display: inline-flex;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		height: 4px;
-		width: 100%;
+}
+.active::after {
+	content: "";
+	display: inline-flex;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 4px;
+	width: 100%;
 
-		border-radius: 2px;
-	}
+	border-radius: 2px;
 }
