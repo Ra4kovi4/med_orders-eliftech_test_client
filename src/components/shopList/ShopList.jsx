@@ -1,29 +1,21 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 
+import { Shop } from "../Shop";
 import css from "./ShopList.module.css";
-export const ShopList = ({ shops, handleClick }) => {
-	const [selectedShopId, setSelectedShopId] = useState(null);
 
-	const handleShopClick = (id) => {
-		setSelectedShopId(id);
-		handleClick(id);
-	};
-
+export const ShopList = ({ shops, handleClick, selectedShopId }) => {
 	return (
 		<>
 			<ul className={css.shopList}>
 				{shops.map(({ _id, name, address }) => (
-					<li
+					<Shop
 						key={_id}
-						className={`${css.shopItem} ${
-							_id === selectedShopId ? css.selected : ""
-						}`}
-						disabled={selectedShopId && _id !== selectedShopId}
-						onClick={() => handleShopClick(_id)}>
-						<p className={css.shopTitle}>{name}</p>
-						<p className={css.shopAddress}>{address}</p>
-					</li>
+						id={_id}
+						name={name}
+						address={address}
+						selectedShopId={selectedShopId}
+						handleClick={handleClick}
+					/>
 				))}
 			</ul>
 		</>
@@ -40,4 +32,6 @@ ShopList.propTypes = {
 		})
 	).isRequired,
 	handleClick: PropTypes.func.isRequired,
+	selectedShopId: PropTypes.string,
+	isDisabled: PropTypes.bool,
 };

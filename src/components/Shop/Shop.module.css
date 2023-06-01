@@ -1,0 +1,55 @@
+@media screen and (max-width: 320px) {
+	.shopItem {
+		height: auto;
+		margin-bottom: 5px;
+	}
+}
+@media screen and (min-width: 321px) and (max-width: 760px) {
+	.shopItem {
+		height: auto;
+		margin-bottom: 5px;
+	}
+}
+
+.shopItem {
+	width: 100%;
+	height: 120px;
+	border-radius: 15px;
+	background-color: rgb(225, 180, 111);
+	margin-bottom: 10px;
+	text-align: center;
+	padding: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.shopItem:hover {
+	background-color: #a59a0a;
+}
+
+.shopItem.selected {
+	background-color: #eee30d;
+	font-weight: 600;
+}
+
+.shopItem.disabled {
+	background-color: #6c6b64;
+	font-weight: 600;
+}
+
+.shopTitle {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 7px;
+}
+
+.shopAddress {
+	font-size: 16px;
+	font-style: italic;
+}
+
+.shopItem {
+	padding: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}

@@ -1,29 +1,43 @@
 import PropTypes from "prop-types";
 
 import css from "./DishCard.module.css";
+
 import { useEffect, useState } from "react";
 
-export const DishCard = ({ title, id, imageUrl, price }) => {
+export const DishCard = ({
+	title,
+	id,
+	imageUrl,
+	price,
+	shopId,
+	selectedShopId,
+	isDisabled,
+}) => {
 	const [isAdded, setIsAdded] = useState(false);
 
 	useEffect(() => {
 		const storedDishes = JSON.parse(localStorage.getItem("dishes")) || [];
 
-		const existingDishIndex = storedDishes.map((item) => item.id);
+		const existingDishIndex = storedDishes.findIndex(
+			(dish) => dish.id === id && dish.shopId === selectedShopId
+		);
 
-		if (existingDishIndex.includes(id)) {
+		if (existingDishIndex !== -1) {
 			setIsAdded(true);
 		} else {
 			setIsAdded(false);
 		}
-	}, [id]);
+	}, [id, selectedShopId]);
 
 	const handleButtonClick = () => {
 		const storedDishes = JSON.parse(localStorage.getItem("dishes")) || [];
-		const existingDishIndex = storedDishes.findIndex((dish) => dish.id === id);
+		const existingDishIndex = storedDishes.findIndex(
+			(dish) => dish.id === id && dish.shopId === selectedShopId
+		);
 
 		if (existingDishIndex !== -1) {
 			storedDishes.splice(existingDishIndex, 1);
+
 			setIsAdded(false);
 		} else {
 			const newDish = {
@@ -31,10 +45,12 @@ export const DishCard = ({ title, id, imageUrl, price }) => {
 				title,
 				imageUrl,
 				price,
+				shopId: selectedShopId,
 				isAdded: true,
 				quantity: 1,
 			};
 			storedDishes.push(newDish);
+
 			setIsAdded(true);
 		}
 
@@ -58,9 +74,10 @@ export const DishCard = ({ title, id, imageUrl, price }) => {
 				<p className={css.price}>Price: {price}$</p>
 			</div>
 			<button
-				className={css.addButton}
+				className={`${css.addButton} ${isDisabled ? css.disabled : ""}`}
 				type='button'
-				onClick={handleButtonClick}>
+				onClick={handleButtonClick}
+				disabled={isDisabled || shopId !== selectedShopId}>
 				{!isAdded ? "Add" : "Remove"}
 			</button>
 		</div>
@@ -71,6 +88,8 @@ DishCard.propTypes = {
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	imageUrl: PropTypes.string.isRequired,
-
+	shopId: PropTypes.string.isRequired,
 	price: PropTypes.number.isRequired,
+	selectedShopId: PropTypes.string,
+	isDisabled: PropTypes.bool,
 };

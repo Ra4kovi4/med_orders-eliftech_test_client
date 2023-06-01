@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-// import { useState, useEffect } from "react";
+
 import { OrderedCard } from "../OrderedCard/OrderedCard";
 import { getTotalPrice } from "../../helpers";
 import css from "./OrderedDish.module.css";

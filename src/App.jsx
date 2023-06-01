@@ -14,6 +14,7 @@ const App = () => {
 				<Route path='/' element={<Layout />}>
 					<Route index element={<ShopPage />} />
 					<Route path='/cart' element={<CartPage />} />
+
 					<Route path='*' element={<ShopPage />} />
 				</Route>
 			</Routes>
