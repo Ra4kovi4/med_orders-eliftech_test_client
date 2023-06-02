@@ -57,10 +57,7 @@ export const ShopPage = React.memo(() => {
 
 			setIsDisabled(otherShopProducts);
 		} catch (error) {
-			toast.error("Oops, something went wrong! Please try again later", {
-				position: "top-right",
-				autoClose: 2000,
-			});
+			console.log(error.message);
 		} finally {
 			setIsLoading(false);
 		}
@@ -77,7 +74,9 @@ export const ShopPage = React.memo(() => {
 			) : (
 				<>
 					{!isLoading && !shopData && <NotFound />}
-					<h2 className={css.shopPage_title}>Choose what you want to eat </h2>
+					{shopData && (
+						<h2 className={css.shopPage_title}>Choose what you want to eat </h2>
+					)}
 					<div className={css.content_wrapper}>
 						{shopData && (
 							<ShopList

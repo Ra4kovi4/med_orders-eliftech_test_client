@@ -1,0 +1,96 @@
+.form_wrapper {
+	max-width: 300px;
+	flex-basis: 20%;
+	height: 250px;
+	padding: 15px 5px;
+	background-color: rgb(247, 179, 96);
+	border: 1px #000 solid;
+	border-radius: 10px;
+	margin-right: 25px;
+}
+@media (max-width: 320px) {
+	.form_wrapper {
+		max-width: 260px;
+		margin-right: 10px;
+	}
+}
+@media (max-width: 760px) {
+	.form_wrapper {
+		max-width: 280px;
+		margin-right: 10px;
+	}
+}
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.label {
+	display: block;
+	margin-bottom: 5px;
+}
+.select {
+	width: 80px;
+	height: 30px;
+	padding: 4px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.input_part {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 16px;
+	padding-left: 15px;
+}
+
+.input {
+	width: 100%;
+	height: 40px;
+	padding: 5px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+@media (max-width: 320px) {
+	.input {
+		height: 30px;
+	}
+}
+@media (max-width: 760px) {
+	.input {
+		height: 35px;
+	}
+}
+.submit_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 150px;
+	height: 40px;
+	background-color: rgb(233, 114, 23);
+	font-size: 16px;
+	font-weight: 600;
+	border-radius: 25px;
+}
+
+@media (max-width: 320px) {
+	.submit_button {
+		width: 110px;
+		height: 30px;
+		font-size: 12px;
+	}
+}
+@media (max-width: 760px) {
+	.submit_button {
+		width: 130px;
+		height: 35px;
+		font-size: 14px;
+	}
+}
+.submit_button:hover,
+.submit_button:focus {
+	background-color: rgb(123, 57, 7);
+}

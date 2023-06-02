@@ -1,10 +1,11 @@
 import { ToastContainer, toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { getTotalPrice } from "../../helpers";
+import { getTotalPrice, isValidOrderForm } from "../../helpers";
 import { OrderForm } from "../../components/OrderForm";
 import { OrderedDish } from "../../components/OrderedDish";
 import { sendOrder } from "../../api";
+
 import css from "./Cart.module.css";
 
 const Cart = () => {
@@ -63,16 +64,23 @@ const Cart = () => {
 				totalPrice: getTotalPrice(orderData),
 			};
 
-			await sendOrder(requestData).then(() => {
-				toast.info("your order was successful");
-			});
+			const { isValid } = isValidOrderForm(requestData);
+
+			if (!isValid) {
+				return;
+			} else {
+				await sendOrder(requestData).then(() => {
+					toast.info("Your order was successful");
+				});
+				localStorage.removeItem("dishes");
+				setOrderData([]);
+			}
 		} catch (error) {
 			toast.warn("Oops! Something went wrong");
 			console.log(error.message);
 		}
-		localStorage.removeItem("dishes");
-		setOrderData([]);
 	};
+
 	return (
 		<main className={css.page_container}>
 			<button className={css.submit_button} onClick={(e) => handleSubmit(e)}>

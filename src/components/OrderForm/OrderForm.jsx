@@ -5,6 +5,7 @@ import css from "./OrderForm.module.css";
 export const OrderForm = ({ formData }) => {
 	const handleChange = (event) => {
 		const { name, value } = event.target;
+
 		formData.set(name, value);
 	};
 
@@ -48,7 +49,7 @@ export const OrderForm = ({ formData }) => {
 						type='text'
 						name='phone'
 						onChange={handleChange}
-						placeholder='+380501111111'
+						placeholder='380501111111'
 					/>
 				</label>
 			</form>

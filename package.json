@@ -11,6 +11,7 @@
 		"deploy": "vite build && gh-pages -d dist"
 	},
 	"dependencies": {
+		"@googlemaps/react-wrapper": "^1.1.35",
 		"axios": "^1.4.0",
 		"gh-pages": "^5.0.0",
 		"modern-normalize": "^2.0.0",

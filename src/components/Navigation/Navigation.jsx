@@ -20,6 +20,13 @@ export const Navigation = () => {
 						Shop Cart
 					</NavLink>
 				</li>
+				<li className={css.nav_item}>
+					<NavLink
+						className={({ isActive }) => (isActive ? css.active : css.link)}
+						to='/history'>
+						Order history
+					</NavLink>
+				</li>
 			</ul>
 		</nav>
 	);

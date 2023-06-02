@@ -5,6 +5,7 @@
 
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 5px;
 }
 .nav_item {
 	display: flex;
@@ -20,10 +21,13 @@
 	padding: 15px;
 	font-weight: 700;
 	color: #2a363b;
+	border: none;
+	border-radius: 25px;
 	transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.link:hover {
-	background-color: #6213ebea;
+.link:hover,
+.link:focus {
+	background-color: #d88027ea;
 }
 .active {
 	display: inline-block;
