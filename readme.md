@@ -8,6 +8,7 @@ To get started with this project, follow these steps:
 Clone the repository:
 
 git clone <https://github.com/Ra4kovi4/med_orders-eliftech_test_client.git>
+
 Install project dependencies:
 
 npm install
