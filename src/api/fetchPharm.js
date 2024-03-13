@@ -2,10 +2,11 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'https://delivery-service-rclm.onrender.com/api/'
 
-export const sendOrder = async (credentials) => {
+export const fetchPharm = async () => {
     try {
-        const response = await axios.post('/orders', credentials)
-        return response
+        const { data } = await axios.get('/pharm')
+
+        return data
     } catch (error) {
         console.log(error)
     }

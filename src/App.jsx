@@ -4,7 +4,7 @@ import { Layout } from "./components/Layout/Layout";
 
 import "./App.css";
 
-const ShopPage = lazy(() => import("./pages/shops/Shops"));
+const PharmPage = lazy(() => import("./pages/pharms/Pharm"));
 const CartPage = lazy(() => import("./pages/cart/Cart"));
 const HistoryPage = lazy(() => import("./pages/history/History"));
 const App = () => {
@@ -12,10 +12,10 @@ const App = () => {
 		<>
 			<Routes>
 				<Route path='/' element={<Layout />}>
-					<Route index element={<ShopPage />} />
+					<Route index element={<PharmPage />} />
 					<Route path='/cart' element={<CartPage />} />
 					<Route path='/history' element={<HistoryPage />} />
-					<Route path='*' element={<ShopPage />} />
+					<Route path='*' element={<PharmPage />} />
 				</Route>
 			</Routes>
 		</>

@@ -1,15 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from "./App.jsx";
-import "modern-normalize/modern-normalize.css";
-import "./index.css";
-import { BrowserRouter } from "react-router-dom";
+import App from './App.jsx'
+import 'modern-normalize/modern-normalize.css'
+import './index.css'
+import { CartProvider } from './CartContext/CartContext.jsx'
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
-		<BrowserRouter basename='/eliftech_delivery-service-frontend'>
-			<App />
-		</BrowserRouter>
-	</React.StrictMode>
-);
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <CartProvider>
+                <App />
+            </CartProvider>
+        </BrowserRouter>
+    </React.StrictMode>
+)

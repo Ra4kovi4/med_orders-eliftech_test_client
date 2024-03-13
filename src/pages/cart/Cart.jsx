@@ -1,102 +1,110 @@
-import { ToastContainer, toast } from "react-toastify";
-import { useState, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import { getTotalPrice, isValidOrderForm } from "../../helpers";
-import { OrderForm } from "../../components/OrderForm";
-import { OrderedDish } from "../../components/OrderedDish";
-import { sendOrder } from "../../api";
+import { ToastContainer, toast } from 'react-toastify'
+import { useState, useEffect } from 'react'
+import 'react-toastify/dist/ReactToastify.css'
+import { getTotalPrice, isValidOrderForm } from '../../helpers'
+import { OrderForm } from '../../components/OrderForm'
+import { OrderedMedicate } from '../../components/OrderedMedicate'
+import { useCart } from '../../CartContext/CartContext'
+import { sendOrder } from '../../api'
 
-import css from "./Cart.module.css";
+import css from './Cart.module.css'
 
 const Cart = () => {
-	const formData = new FormData();
+    const formData = new FormData()
+    const { setCartItemCount, resetCart } = useCart()
+    const [orderData, setOrderData] = useState([])
 
-	const [orderData, setOrderData] = useState([]);
+    useEffect(() => {
+        const storedMedicates =
+            JSON.parse(localStorage.getItem('medicates')) || []
 
-	useEffect(() => {
-		const storedDishes = JSON.parse(localStorage.getItem("dishes")) || [];
+        setOrderData(storedMedicates)
 
-		setOrderData(storedDishes);
+        const handleStorageChange = (event) => {
+            if (event.key === 'medicates') {
+                const storedMedicates = JSON.parse(event.newValue) || []
+                setOrderData(storedMedicates)
+            }
+        }
 
-		const handleStorageChange = (event) => {
-			if (event.key === "dishes") {
-				const storedDishes = JSON.parse(event.newValue) || [];
-				setOrderData(storedDishes);
-			}
-		};
+        window.addEventListener('storage', handleStorageChange)
 
-		window.addEventListener("storage", handleStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleStorageChange)
+        }
+    }, [])
 
-		return () => {
-			window.removeEventListener("storage", handleStorageChange);
-		};
-	}, []);
+    const handleButtonClick = (id) => {
+        const updatedMedicate = orderData.filter(
+            (medicate) => medicate.id !== id
+        )
+        setOrderData(updatedMedicate)
+        localStorage.setItem('medicates', JSON.stringify(updatedMedicate))
+        setCartItemCount((prevCount) => prevCount - 1)
+    }
 
-	const handleButtonClick = (id) => {
-		const updatedDishes = orderData.filter((dish) => dish.id !== id);
-		setOrderData(updatedDishes);
-		localStorage.setItem("dishes", JSON.stringify(updatedDishes));
-	};
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (
+            formData.get('name') === null ||
+            formData.get('address') === null ||
+            formData.get('email') === null ||
+            formData.get('phone') === null
+        ) {
+            toast.info('Please fill all fields and choose medicates')
+            return
+        }
+        if (orderData.length === 0) {
+            toast.info('Please choose medicates')
+            return
+        }
+        try {
+            const requestData = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                address: formData.get('address'),
+                phone: formData.get('phone'),
+                medicates: orderData,
+                totalPrice: getTotalPrice(orderData)
+            }
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+            const { isValid } = isValidOrderForm(requestData)
 
-		if (
-			formData.get("name") === null ||
-			formData.get("address") === null ||
-			formData.get("email") === null ||
-			formData.get("phone") === null
-		) {
-			toast.info("Please fill all fields and choose dishes");
-			return;
-		}
-		if (orderData.length === 0) {
-			toast.info("Please choose dishes");
-			return;
-		}
-		try {
-			const requestData = {
-				name: formData.get("name"),
-				email: formData.get("email"),
-				address: formData.get("address"),
-				phone: formData.get("phone"),
-				dishes: orderData,
-				totalPrice: getTotalPrice(orderData),
-			};
+            if (!isValid) {
+                return
+            } else {
+                await sendOrder(requestData).then(() => {
+                    toast.info('Your order was successful')
+                })
+                localStorage.removeItem('medicates')
+                setOrderData([])
+            }
+        } catch (error) {
+            toast.warn('Oops! Something went wrong')
+            console.log(error.message)
+        }
+        resetCart()
+    }
 
-			const { isValid } = isValidOrderForm(requestData);
+    return (
+        <main className={css.page_container}>
+            <button
+                className={css.submit_button}
+                onClick={(e) => handleSubmit(e)}
+            >
+                Place an order
+            </button>
+            <div className={css.content_wrapper}>
+                <OrderForm formData={formData} />
+                <OrderedMedicate
+                    orderedMedicate={orderData}
+                    handleButtonClick={handleButtonClick}
+                    setOrderedMedicate={setOrderData}
+                />
+            </div>
 
-			if (!isValid) {
-				return;
-			} else {
-				await sendOrder(requestData).then(() => {
-					toast.info("Your order was successful");
-				});
-				localStorage.removeItem("dishes");
-				setOrderData([]);
-			}
-		} catch (error) {
-			toast.warn("Oops! Something went wrong");
-			console.log(error.message);
-		}
-	};
-
-	return (
-		<main className={css.page_container}>
-			<button className={css.submit_button} onClick={(e) => handleSubmit(e)}>
-				Place an order
-			</button>
-			<div className={css.content_wrapper}>
-				<OrderForm formData={formData} />
-				<OrderedDish
-					orderedDish={orderData}
-					handleButtonClick={handleButtonClick}
-					setOrderedDish={setOrderData}
-				/>
-			</div>
-
-			<ToastContainer autoClose={2000} />
-		</main>
-	);
-};
-export default Cart;
+            <ToastContainer autoClose={2000} />
+        </main>
+    )
+}
+export default Cart

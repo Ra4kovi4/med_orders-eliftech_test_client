@@ -1,4 +1,4 @@
 export * from "./getTotalPrice";
-export * from "./addShopIdDishes";
+export * from "./addPharmIdToMedicates";
 export * from "./isValidHistoryForm";
 export * from "./isValidOrderForm";
