@@ -18,7 +18,9 @@ npm start
 Open http://localhost:5174/ in your web browser to view the application.
 
 Backend Repository
-You can find the backend repository for this project at https://github.com/Ra4kovi4/med_orders-eliftech_test_service.git
+You can find the backend repository for this project at
+
+https://github.com/Ra4kovi4/med_orders-eliftech_test_service.git
 
 Home page
 On the home page you will find a list of all available pharmacies and medications.
