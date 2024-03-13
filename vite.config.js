@@ -10,7 +10,7 @@ export default defineConfig({
         reactRefresh(),
         EnvironmentPlugin('all', { prefix: 'REACT_APP_' })
     ],
-    base: 'http://localhost:5173',
+    base: 'http://med_orders-eliftech_test_client/',
     build: {
         rollupOptions: {
             output: {
